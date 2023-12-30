@@ -1,5 +1,5 @@
 from abc import ABC
-from typing import List
+from typing import List, Tuple
 import random
 from transformers import AutoTokenizer, AutoModelForTokenClassification
 from transformers import pipeline
@@ -12,12 +12,12 @@ class Attack(ABC):
     def __init__(self):
         self.name = None
 
-    def attack(self, sentences: List[str]) -> str:
-        pass
+    def attack(self, sentences: List[str]) -> Tuple[str, int]:
+        changes = 0
+        return ' '.join(sentences), changes
 
     def __call__(self, sentences: List[str]) -> str:
-        changes = 0
-        return self.attack(sentences), changes
+        return self.attack(sentences)
 
     def __name__(self):
         return self.name
